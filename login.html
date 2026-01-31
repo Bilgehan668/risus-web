@@ -4,49 +4,40 @@
   <meta charset="UTF-8">
   <title>RisusMC - Giriş Yap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background: url('https://www.atarita.com/wp-content/uploads/2023/11/Minecraft-hileleri-1068x580.jpg') no-repeat center center fixed; background-size: cover; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-    .navbar { background-color: rgba(0, 0, 0, 0.85); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-    .logo { font-size: 26px; font-weight: bold; color: #00ffcc; }
-    nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
-    nav ul li a { color: #fff; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-    nav ul li a:hover { color: #00ffcc; }
-    .form-box { background-color: rgba(0,0,0,0.8); padding: 40px; border-radius: 12px; width: 100%; max-width: 400px; margin-top: 100px; text-align: center; border: 1px solid #00ffcc; }
-    h2 { color: #00ffcc; margin-bottom: 30px; }
-    /* Netlify'ın butonu için stil */
-    .netlify-identity-button { padding: 15px 30px; background-color: #00ffcc; color: #000; border: none; border-radius: 6px; font-weight: bold; font-size: 18px; cursor: pointer; }
+    .form-box { background-color: rgba(0,0,0,0.85); padding: 40px; border-radius: 12px; width: 100%; max-width: 400px; text-align: center; border: 1px solid #00ffcc; }
+    h2 { color: #00ffcc; margin-bottom: 20px; }
+    .google-btn { background-color: #fff; color: #757575; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 100%; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+    .google-btn:hover { background-color: #f1f1f1; }
   </style>
 </head>
 <body>
-
-  <header>
-    <div class="navbar">
-      <div class="logo">RisusMC</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Ana Sayfa</a></li>
-          <li><a href="market.html">Market</a></li>
-          <li><a href="wiki.html">Wiki</a></li>
-          <li><a href="support.html">Destek</a></li>
-          <li><a href="login.html">Giriş Yap</a></li>
-          <li><a href="kayıt.html">Kayıt Ol</a></li>
-          <li><a href="Hesabım.html">Hesabım</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
   <div class="form-box">
-    <h2>Üyelik Paneli</h2>
-    <div data-netlify-identity-button></div>
-    <p style="margin-top: 20px; font-size: 14px; color: #ccc;">Yeni kayıt veya giriş için yukarıdaki butonu kullanın.</p>
+    <h2>RisusMC'ye Katıl</h2>
+    <p>Hemen oynamak için Google hesabınla giriş yap.</p>
+    <button id="googleBtn" class="google-btn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" style="width:20px; margin-right:10px;">
+      Google ile Giriş Yap
+    </button>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
   <script>
-    // Başarılı girişte Hesabım sayfasına gönder
-    window.netlifyIdentity.on("login", () => {
-      window.location.href = "Hesabım.html";
+    const firebaseConfig = {
+      apiKey: "BURAYA_API_KEY",
+      authDomain: "bilgehan668.firebaseapp.com",
+      projectId: "bilgehan668",
+      appId: "BURAYA_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    document.getElementById('googleBtn').addEventListener('click', () => {
+      firebase.auth().signInWithPopup(provider).then(() => {
+        window.location.href = "Hesabım.html";
+      }).catch(err => alert("Giriş hatası: " + err.message));
     });
   </script>
 </body>
