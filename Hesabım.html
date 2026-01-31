@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>RisusMC - Profilim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: url('https://www.atarita.com/wp-content/uploads/2023/11/Minecraft-hileleri-1068x580.jpg') no-repeat center center fixed; background-size: cover; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .navbar { background-color: rgba(0, 0, 0, 0.85); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+    .logo { font-size: 26px; font-weight: bold; color: #00ffcc; }
+    nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+    nav ul li a { color: #fff; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+    nav ul li a:hover { color: #00ffcc; }
+    .profile-box { background-color: rgba(0,0,0,0.85); padding: 40px; border-radius: 12px; width: 100%; max-width: 450px; margin-top: 100px; border: 1px solid #00ffcc; text-align: center; }
+    .profile-avatar { width: 80px; height: 80px; background-color: #333; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; border: 2px solid #00ffcc; }
+    h2 { color: #00ffcc; margin-bottom: 30px; }
+    .info-group { text-align: left; margin-bottom: 20px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; }
+    .label { font-size: 14px; color: #00ffcc; display: block; margin-bottom: 5px; text-transform: uppercase; }
+    .value { font-size: 18px; font-weight: bold; }
+    .logout-btn { width: 100%; padding: 12px; background-color: #ff4d4d; color: #fff; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; transition: background 0.3s; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="navbar">
+      <div class="logo">RisusMC</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="market.html">Market</a></li>
+          <li><a href="wiki.html">Wiki</a></li>
+          <li><a href="support.html">Destek</a></li>
+          <li><a href="login.html">Giriş Yap</a></li>
+          <li><a href="kayıt.html">Kayıt Ol</a></li>
+          <li><a href="Hesabım.html">Hesabım</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="profile-box">
+    <div class="profile-avatar">👤</div>
+    <h2>Hesap Bilgileri</h2>
+    
+    <div class="info-group">
+      <span class="label">Kullanıcı Adı</span>
+      <span class="value" id="username">Bekleniyor...</span>
+    </div>
+
+    <div class="info-group">
+      <span class="label">E-posta Adresi</span>
+      <span class="value" id="useremail">Bekleniyor...</span>
+    </div>
+
+    <div class="info-group">
+      <span class="label">Sunucu Rütbesi</span>
+      <span class="value" style="color: #ffcc00;">Oyuncu</span>
+    </div>
+
+    <button class="logout-btn" id="logoutBtn">Çıkış Yap</button>
+  </div>
+
+  <script>
+    // Kullanıcı kontrolü ve bilgi çekme
+    window.netlifyIdentity.on("init", user => {
+      if (user) {
+        document.getElementById("username").innerText = user.user_metadata.full_name || user.email.split('@')[0];
+        document.getElementById("useremail").innerText = user.email;
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+
+    // Çıkış yap butonu
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      window.netlifyIdentity.logout();
+    });
+
+    // Çıkış sonrası ana sayfaya yönlendir
+    window.netlifyIdentity.on("logout", () => {
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
