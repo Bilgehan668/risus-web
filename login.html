@@ -5,52 +5,79 @@
   <title>RisusMC - Giriş Yap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: url('https://www.atarita.com/wp-content/uploads/2023/11/Minecraft-hileleri-1068x580.jpg') no-repeat center center fixed; background-size: cover; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-    .form-box { background-color: rgba(0,0,0,0.85); padding: 40px; border-radius: 12px; width: 100%; max-width: 400px; text-align: center; border: 1px solid #00ffcc; box-shadow: 0 0 20px rgba(0, 255, 204, 0.2); }
-    h2 { color: #00ffcc; margin-bottom: 20px; }
-    .google-btn { background-color: #fff; color: #757575; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 100%; margin-top: 20px; transition: transform 0.2s; }
-    .google-btn:hover { background-color: #f1f1f1; transform: scale(1.02); }
-    .google-btn img { width: 20px; margin-right: 10px; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: url('https://www.atarita.com/wp-content/uploads/2023/11/Minecraft-hileleri-1068x580.jpg') no-repeat center center fixed; background-size: cover; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    
+    .login-container { background: #fff; padding: 30px; border-radius: 4px; width: 100%; max-width: 350px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center; }
+    h2 { text-align: left; font-size: 22px; margin-top: 0; color: #333; font-weight: bold; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+    
+    .input-group { text-align: left; margin-top: 15px; }
+    label { font-size: 13px; color: #666; font-weight: bold; display: block; margin-bottom: 5px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 3px; box-sizing: border-box; font-size: 14px; }
+    
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 3px; font-weight: bold; cursor: pointer; margin-top: 15px; display: flex; align-items: center; justify-content: center; font-size: 14px; text-transform: uppercase; }
+    
+    .btn-orange { background: #ff7f00; color: #fff; }
+    .btn-google { background: #f1f1f1; color: #4285F4; border: 1px solid #ddd; }
+    .btn-facebook { background: #3b5998; color: #fff; }
+    .btn-dark { background: #444; color: #fff; margin-top: 30px; }
+    
+    .btn img { width: 18px; margin-right: 10px; }
+    
+    .extra-links { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; color: #666; }
+    .extra-links a { color: #666; text-decoration: none; }
   </style>
 </head>
 <body>
 
-  <div class="form-box">
-    <h2>RisusMC Giriş</h2>
-    <p>Ayrı bir kayıt formuna gerek yok! Google ile giriş yaptığında hesabın otomatik oluşturulur.</p>
+  <div class="login-container">
+    <h2>GİRİŞ YAP</h2>
     
-    <button id="googleBtn" class="google-btn">
+    <div class="input-group">
+      <label>E-Mail Adresiniz</label>
+      <input type="email" placeholder="E-Mail Adresiniz">
+    </div>
+
+    <div class="input-group">
+      <label>Parolanız</label>
+      <input type="password" placeholder="******">
+    </div>
+
+    <button class="btn btn-orange">GİRİŞ YAP</button>
+
+    <button class="btn btn-google" id="googleBtn">
       <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg">
-      Google ile Giriş Yap / Kayıt Ol
+      GOOGLE İLE BAĞLAN
     </button>
+
+    <button class="btn btn-facebook">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg">
+      FACEBOOK İLE BAĞLAN
+    </button>
+
+    <div class="extra-links">
+      <label><input type="checkbox" style="width: auto;"> Beni Hatırla</label>
+      <a href="#">Şifremi Unuttum</a>
+    </div>
+
+    <button class="btn btn-dark" onclick="location.href='kayıt.html'">KAYIT OL</button>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
-
   <script>
-    // BURAYI FIREBASE PANELİNDEN ALDIĞIN BİLGİLERLE DOLDUR
     const firebaseConfig = {
-      apiKey: "BURAYA_KENDİ_API_KEYİNİ_YAZ",
+      apiKey: "7dd07c83-9d94-4599-8773-cac209128099", // Buraya kendi Firebase API Key'ini yazmalısın
       authDomain: "bilgehan668.firebaseapp.com",
       projectId: "bilgehan668",
-      appId: "BURAYA_KENDİ_APP_ID_Nİ_YAZ"
+      appId: "KENDI_APP_ID"
     };
-
-    // Firebase'i Başlat
     firebase.initializeApp(firebaseConfig);
+    
     const provider = new firebase.auth.GoogleAuthProvider();
-
-    // Butona Tıklama Olayı
     document.getElementById('googleBtn').addEventListener('click', () => {
-      firebase.auth().signInWithPopup(provider)
-        .then((result) => {
-          console.log("Giriş Başarılı:", result.user);
-          window.location.href = "Hesabım.html"; // Giriş yapınca buraya gider
-        })
-        .catch((error) => {
-          alert("Hata oluştu: " + error.message);
-        });
+      firebase.auth().signInWithPopup(provider).then(() => {
+        window.location.href = "Hesabım.html";
+      }).catch(err => alert(err.message));
     });
   </script>
 </body>
