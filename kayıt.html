@@ -5,7 +5,6 @@
   <title>RisusMC - Kayıt Ol</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* CSS kodların aynen korunmuştur */
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background: url('https://www.atarita.com/wp-content/uploads/2023/11/Minecraft-hileleri-1068x580.jpg') no-repeat center center fixed; background-size: cover; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
     .navbar { background-color: rgba(0, 0, 0, 0.85); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
     .logo { font-size: 26px; font-weight: bold; color: #00ffcc; }
@@ -19,12 +18,8 @@
     .switch { text-align: center; margin-top: 15px; }
     .switch a { color: #00ffcc; text-decoration: none; font-weight: bold; }
   </style>
-
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
 </head>
 <body>
-
   <header>
     <div class="navbar">
       <div class="logo">RisusMC</div>
@@ -41,18 +36,17 @@
       </nav>
     </div>
   </header>
-
   <div class="form-box">
-    <h2>Kayıt Ol</h2>
-    <form name="kayit-formu" method="POST" data-netlify="true">
-      <input type="text" name="kullanici_adi" placeholder="Kullanıcı Adı" required>
+    <h2>Kayıt Başvurusu</h2>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="7dd07c83-9d94-4599-8773-cac209128099">
+      <input type="hidden" name="subject" value="Yeni Kayıt Başvurusu">
+      <input type="text" name="kullanici_adi" placeholder="Minecraft Kullanıcı Adı" required>
       <input type="email" name="email" placeholder="E-posta" required>
       <input type="password" name="sifre" placeholder="Şifre" required>
-      <input type="password" name="sifre_tekrar" placeholder="Yeniden Şifre" required>
-      <button type="submit">Kayıt Ol</button>
+      <button type="submit">Başvuruyu Gönder</button>
     </form>
-    <div class="switch">Hesabın Var mı? <a href="login.html">Giriş Yap</a></div>
+    <div class="switch">Zaten hesabın var mı? <a href="login.html">Giriş Yap</a></div>
   </div>
-
-<body>
+</body>
 </html>
