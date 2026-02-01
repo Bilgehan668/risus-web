@@ -34,7 +34,7 @@
     <div class="login-container">
       <h2>GİRİŞ YAP</h2>
       <label>E-Mail Adresiniz</label>
-      <input type="email" id="loginEmail" placeholder="E-Mail Adresiniz">
+      <input type="email" id="loginEmail" placeholder="ornek@mail.com">
       <label>Parolanız</label>
       <input type="password" id="loginPass" placeholder="******">
       <button class="btn btn-orange" id="loginBtn">GİRİŞ YAP</button>
@@ -47,23 +47,30 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyAG5JNLnKKCPy7aNqS5EFSE7ItjTZjCrtQ",
+      apiKey: "AIzaSyAG5JNlnKKCpY7aNqS5EFSE7ItjTZjCrtQ",
       authDomain: "risusmc-web.firebaseapp.com",
       projectId: "risusmc-web",
       storageBucket: "risusmc-web.firebasestorage.app",
       messagingSenderId: "533190912009",
-      appId: "1:533190912009:web:2d1649cc70484a84abf0d8",
-      measurementId: "G-J1VFECP5XE"
+      appId: "1:533190912009:web:3c1f805f3c2f51f5abf0d8",
+      measurementId: "G-7KXDFX8MRQ"
     };
 
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
 
     document.getElementById('loginBtn').addEventListener('click', () => {
-      firebase.auth().signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
-        .then(() => window.location.href="Hesabım.html").catch(e => alert("Giriş Hatası: " + e.message));
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPass').value;
+      firebase.auth().signInWithEmailAndPassword(email, pass)
+        .then(() => window.location.href="Hesabım.html")
+        .catch(e => alert("Hata: " + e.message));
     });
+
     document.getElementById('googleBtn').addEventListener('click', () => {
-      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() => window.location.href="Hesabım.html").catch(e => alert(e.message));
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+        .then(() => window.location.href="Hesabım.html")
+        .catch(e => alert("Hata: " + e.message));
     });
   </script>
 </body>
