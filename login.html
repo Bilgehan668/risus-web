@@ -46,17 +46,20 @@
 
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAG5JNLnKKCPy7aNqS5EFSE7ItjTZjCrtQ",
-      authDomain: "risusmc-web.firebaseapp.com",
-      projectId: "risusmc-web",
-      storageBucket: "risusmc-web.firebasestorage.app",
-      messagingSenderId: "533190912009",
-      appId: "1:533190912009:web:2d1649cc70484a84abf0d8",
-      measurementId: "G-J1VFECP5XE"
-    };
-    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+  <script>const firebaseConfig = {
+  apiKey: "AIzaSyAG5JNLnKKCPy7aNqS5EFSE7ItjTZjCrtQ",
+  authDomain: "risusmc-web.firebaseapp.com",
+  projectId: "risusmc-web",
+  storageBucket: "risusmc-web.firebasestorage.app",
+  messagingSenderId: "533190912009",
+  appId: "1:533190912009:web:2d1649cc70484a84abf0d8",
+  measurementId: "G-J1VFECP5XE"
+};
+
+// Önemli: Firebase'in sadece bir kez başlatıldığından emin ol
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 
     document.getElementById('loginBtn').addEventListener('click', () => {
       firebase.auth().signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value)
